@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lib/lwjgl.jar lib/natives-win32.jar lib/slick.jar lib/kryonet-1.04-all.jar
+Created-By: Darcy Miranda
+Main-Class: client.game.Celeri

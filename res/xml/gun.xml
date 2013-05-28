@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<weapon>
+	<name>gun</name>
+	<damage>
+		<min>3</min>
+		<max>5</max>
+	</damage>
+	<spread>0.89</spread>
+	<fire_rate>80</fire_rate>
+	<bullet_speed>520</bullet_speed>
+	<reload_time>1500</reload_time>
+	<max_ammo>36</max_ammo>
+</weapon>
