@@ -1,1 +1,9 @@
 Top down shooter made in java, using Slick2d library
+
+Controls:
+W, S, D, A to move
+Left click to shoot
+R to reload
+
+F1 to restart
+T for debug mode
