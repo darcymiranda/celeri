@@ -1,5 +1,6 @@
 package com.heavydose.shared.bullets;
 
+import com.heavydose.Cache;
 import org.newdawn.slick.Image;
 
 import com.heavydose.shared.items.weapons.Weapon;
@@ -7,11 +8,11 @@ import com.heavydose.shared.items.weapons.Weapon;
 public class GenericBullet extends Bullet{
 
 	public GenericBullet(Weapon weapon) {
-		super(weapon, 0, 0, 0, com.heavydose.client.Cache.images.get("bullet"));
+		super(weapon, 0, 0, 0, Cache.images.get("bullet"));
 	}
 	
 	public GenericBullet(Weapon weapon, int damage, float direction, float speed) {
-		super(weapon, damage, direction, speed, com.heavydose.client.Cache.images.get("bullet"));
+		super(weapon, damage, direction, speed, Cache.images.get("bullet"));
 	}
 	
 	public GenericBullet(Weapon weapon, int damage, float direction, float speed, Image image) {

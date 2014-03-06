@@ -1,13 +1,12 @@
 package com.heavydose.shared;
 
 
+import com.heavydose.game.Celeri;
+import com.heavydose.game.Player;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
-
-import com.heavydose.client.game.Celeri;
-import com.heavydose.network.Player;
 
 public abstract class Entity {
 	

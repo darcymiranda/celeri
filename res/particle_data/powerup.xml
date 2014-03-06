@@ -12,7 +12,7 @@
 <emitCount enabled="false" max="12.0" min="12.0"/>
 <spread type="random" value="360.0"/>
 <angularOffset type="simple" value="0.0"/>
-<growthFactor type="simple" value="21.0"/>
+<growthFactor type="simple" value="3.0"/>
 <gravityFactor type="simple" value="0.0"/>
 <windFactor type="simple" value="0.0"/>
 <startAlpha type="simple" value="255.0"/>

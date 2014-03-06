@@ -1,4 +1,4 @@
-package com.heavydose.client.game.gui;
+package com.heavydose.game.gui;
 
 import org.newdawn.slick.Graphics;
 

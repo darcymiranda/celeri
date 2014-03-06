@@ -3,11 +3,8 @@ package com.heavydose.shared.bullets;
 import java.util.Random;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.util.FastTrig;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.items.weapons.Weapon;
 import com.heavydose.util.Tools;
 

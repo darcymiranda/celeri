@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.newdawn.slick.Sound;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.GenericBullet;
 import com.heavydose.shared.items.weapons.Weapon;
@@ -16,6 +16,9 @@ public class Spider extends Enemy {
 
 	public Spider(float x, float y, int level) {
 		super(x, y, 32, 32, level);
+
+        score = 5;
+
 		speed = 220;
 		sight = 90000;
 		setHealth(5);

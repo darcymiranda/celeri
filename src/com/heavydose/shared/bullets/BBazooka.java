@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.util.Log;
 
-import com.heavydose.client.game.Celeri;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.Unit;
 import com.heavydose.shared.items.weapons.Weapon;

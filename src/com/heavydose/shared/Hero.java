@@ -4,9 +4,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
-import com.heavydose.client.game.gui.TextField;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
+import com.heavydose.game.gui.TextField;
 import com.heavydose.shared.bullets.Bullet;
 import com.heavydose.shared.items.DropItem;
 import com.heavydose.shared.items.Item;
@@ -188,7 +188,7 @@ public class Hero extends Unit {
 		
 		((TextField) Celeri.hud.components.get("equipWeaponName")).setText(weapon.getName());
 	}
-	
+	     /*
 	public void throwGernade(Vector2f target){
 		if(gernadeAmmo < 1 && isAlive()) return;
 		
@@ -198,6 +198,7 @@ public class Hero extends Unit {
 		gernadeAmmo--;
 		
 	}
+	*/
 	
 	public void emptyWeaponPocket(){
 		for(int i = 0; i < weaponPocket.length; i++)
@@ -211,8 +212,8 @@ public class Hero extends Unit {
 		for(int i = 0; i < weaponPocket.length; i++){
 			Weapon wp = weaponPocket[i];
 			if(wp == null){
-				weaponPocket[i] = weapon;
-				equipWeapon(weapon);
+				if(weaponPocket[0] == null || weaponPocket[1] == null) equipWeapon(weapon);
+                weaponPocket[i] = weapon;
 				return true;
 			} else {
 				if(weapon.getClass().equals(wp.getClass())){

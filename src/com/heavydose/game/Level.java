@@ -1,11 +1,12 @@
-package com.heavydose.client.game;
+package com.heavydose.game;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.heavydose.game.gui.HealthBar;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.Hero;
 import com.heavydose.shared.enemies.BigSpider;
@@ -95,43 +96,31 @@ public class Level {
 			
 			Vector2f spawnPoint = spawns.get(rand.nextInt(spawns.size()));
 			
-			Enemy spawn = new Creeper(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());;
+			Enemy spawn = new Creeper(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
 			
 			float chance = rand.nextFloat();
-			switch(levelCount){
-				case 18:
-				case 17:
-				case 16:
-				case 15:
-				case 14:
-				case 13:
-				case 12:
-				case 11:
-				case 10:
-				case 9:
-				case 8:
-				case 7:
-				case 6:
-				case 5:
-					spawnBoss();
-				case 4:
-					if(chance > 0.84){
-						spawn = new BigSpider(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
-						break;
-					}
-				case 3:
-					if(chance > 0.85){
-						spawn = new Strangler(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
-						break;
-					}
-				case 2:
-					if(chance > 0.95){
-						spawn = new Spitter(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
-						break;
-					}					
-				case 1:
-					
-			}
+
+            if(levelCount > 3){
+                if(chance > 0.95){
+                    spawn = new Spitter(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
+                }
+            }
+
+            if(levelCount > 5){
+                if(chance > 0.85){
+                    spawn = new Strangler(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
+                }
+            }
+
+            if(levelCount > 7){
+                if(chance > 0.84){
+                    spawn = new BigSpider(spawnPoint.x, spawnPoint.y, Celeri.currentLevel.getLevelCount());
+                }
+            }
+
+            if(levelCount % 2 == 0){
+                spawnBoss();
+            }
 		
 			spawn.setHitBox();
 			Celeri.entityManager.addEntity(spawn);	
@@ -144,17 +133,26 @@ public class Level {
 	
 	public void spawnBoss(){
 
-		if(!hasBossSpawned){
-			game.getCamera().shake();
-			Entity spawn = new WormBoss(heroSpawnPosition.x, heroSpawnPosition.y, Celeri.currentLevel.getLevelCount());
-			spawn.setHitBox();
-			Celeri.entityManager.addEntity(spawn);	
-			hasBossSpawned = true;
-			Cache.music.get("rock_loop").fade(3000, 0, true);
-			Cache.music.get("boss_loop").loop(1, .05f);
-		}
-		
-		
+        if(!hasBossSpawned){
+            game.getCamera().shake(1, 3);
+            Enemy spawn = new WormBoss(heroSpawnPosition.x, heroSpawnPosition.y, Celeri.currentLevel.getLevelCount());
+            spawn.setHitBox();
+            spawn.setHealth(spawn.getHealth() + (levelCount * 50), spawn.getMaxHealth() + (levelCount * 50));
+            Celeri.entityManager.addEntity(spawn);
+            Cache.music.get("rock_loop").fade(3000, 0, false);
+            Cache.music.get("boss_loop").loop(1, 0);
+            Cache.music.get("boss_loop").fade(1000, 0.05f, false);
+            hasBossSpawned = true;
+
+            /**
+            HealthBar bar = new HealthBar("WormBossHealth", new Vector2f(Celeri.gc.getWidth() * 0.45f, 15));
+            bar.setImage(Cache.images.get("ui_healthbar_boss"), true);
+            bar.setUnit(spawn);
+
+            Celeri.hud.addComponent(bar);
+                **/
+        }
+
 	}
 	
 	public void nextLevel(){
@@ -162,6 +160,7 @@ public class Level {
 		spawnedEnemies = 0;
 		enemiesOnField += 25;
 		totalEnemies += 15;
+        hasBossSpawned = false;
 	}
 
 	public final int getRemainingEnemies(){ return totalEnemies - spawnedEnemies; }

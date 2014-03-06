@@ -1,11 +1,8 @@
-package com.heavydose.client.game;
-
-import java.io.IOException;
+package com.heavydose.game;
 
 import org.newdawn.slick.particles.ConfigurableEmitter;
-import org.newdawn.slick.particles.ParticleIO;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 
 
 public class Emitters {

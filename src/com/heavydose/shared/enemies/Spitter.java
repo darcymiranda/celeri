@@ -5,8 +5,8 @@ import java.util.Random;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.Bullet;
 import com.heavydose.shared.bullets.GenericBullet;
@@ -22,6 +22,9 @@ public class Spitter extends Enemy {
 	
 	public Spitter(float x, float y, int level) {
 		super(x, y, 32, 32, level);
+
+        score = 48;
+
 		speed = 90;
 		sight = 250000;
 		attackRange = 130000;

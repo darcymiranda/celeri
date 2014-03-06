@@ -2,6 +2,7 @@ package com.heavydose.shared.items.weapons;
 
 import java.util.Random;
 
+import com.heavydose.Cache;
 import org.newdawn.slick.Sound;
 
 import com.heavydose.shared.Entity;
@@ -58,7 +59,7 @@ public class Weapon extends Item {
 		rand.nextFloat();
 		rand.nextFloat();
 		
-		setBullet(new GenericBullet(this, 0, 0f, 0f, com.heavydose.client.Cache.images.get("bullet")));
+		setBullet(new GenericBullet(this, 0, 0f, 0f, Cache.images.get("bullet")));
 		
 	}
 	
@@ -158,7 +159,8 @@ public class Weapon extends Item {
 			reloading = false;
 		
 		if(soundShoot != null){
-			soundShoot.play(1,0.75f);
+            float pitch = 0.75f + (float)Math.random() * ((1.25f - 0.75f) + 1);
+			soundShoot.play(pitch,0.75f);
 		}
 			
 		curAmmo--;

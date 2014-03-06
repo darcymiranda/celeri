@@ -1,6 +1,6 @@
 package com.heavydose.shared.enemies;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.shared.Entity;
 import com.heavydose.util.Tools;
 
@@ -13,6 +13,8 @@ public class MutatedZombie extends Enemy {
 
 	public MutatedZombie(float x, float y, int level) {
 		super(x, y, 32, 32, level);
+
+        score = 25;
 		
 		chargeDistance = 280;
 		chargeSpeedModifier = 4;

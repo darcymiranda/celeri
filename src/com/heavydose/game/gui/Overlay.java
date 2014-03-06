@@ -1,8 +1,8 @@
-package com.heavydose.client.game.gui;
+package com.heavydose.game.gui;
 
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 
 
 public class Overlay extends Component {

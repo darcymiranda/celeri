@@ -8,12 +8,10 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.util.Log;
 
-import com.heavydose.client.game.Celeri;
-import com.heavydose.client.game.Effect;
+import com.heavydose.game.Effect;
 import com.heavydose.shared.bullets.BShotGunRanged;
 import com.heavydose.shared.bullets.Bullet;
 import com.heavydose.shared.enemies.Enemy;
-import com.heavydose.shared.enemies.WormBoss;
 import com.heavydose.shared.items.DropItem;
 import com.heavydose.shared.map.Path;
 import com.heavydose.shared.map.Pathfinder;

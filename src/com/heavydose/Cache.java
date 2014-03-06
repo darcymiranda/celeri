@@ -1,4 +1,4 @@
-package com.heavydose.client;
+package com.heavydose;
 
 import java.awt.Font;
 import java.io.File;
@@ -83,6 +83,7 @@ public class Cache {
 			images.put("p_default", new Image("res/img/particles/p_default.png"));
 			images.put("hero_legs", new Image("res/img/test_hero_legs.png"));
 			images.put("ui_healthbar", new Image("res/img/ui/healthbar2.png"));
+            images.put("ui_healthbar_boss", new Image("res/img/ui/healthbar.png"));
 			images.put("ui_overlay", new Image("res/img/ui/overlay.png"));
 			images.put("ui_healthunit", new Image("res/img/ui/healthunit.png"));
 			images.put("ui_wires", new Image("res/img/ui/wires.png"));

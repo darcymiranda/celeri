@@ -1,8 +1,10 @@
 package com.heavydose.shared.items.weapons;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.BRail;
+import com.heavydose.shared.bullets.Bullet;
 
 public class Railgun extends Weapon {
 
@@ -11,7 +13,7 @@ public class Railgun extends Weapon {
 		soundShoot = Cache.sounds.get("rail");
 		soundReload = Cache.sounds.get("reload");
 		dropItemImage = Cache.images.get("item_r");
-		setBullet(new BRail(this, 0, 0f, 0f, com.heavydose.client.Cache.images.get("b_rail")));
+		setBullet(new BRail(this, 0, 0f, 0f, Cache.images.get("b_rail")));
 		
 	}
 	
@@ -19,5 +21,14 @@ public class Railgun extends Weapon {
 	public Weapon newInstance(Entity owner){
 		return new Railgun(owner);
 	}
+
+    @Override
+    public Bullet[] onShoot(){
+        Bullet[] bullets = super.onShoot();
+
+        Celeri.cam.shake(0.20f, 1);
+
+        return bullets;
+    }
 
 }

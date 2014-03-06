@@ -4,8 +4,8 @@ import java.util.Random;
 
 import org.newdawn.slick.Sound;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.Bullet;
 import com.heavydose.shared.bullets.GenericBullet;
@@ -17,6 +17,9 @@ public class BigSpider extends Enemy {
 
 	public BigSpider(float x, float y, int level) {
 		super(x, y, 64, 64, level);
+
+        score = 224;
+
 		speed = 70;
 		sight = 250000;
 		setHealth(75);

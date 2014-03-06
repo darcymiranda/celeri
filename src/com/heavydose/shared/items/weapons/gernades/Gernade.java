@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.util.FastTrig;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
-import com.heavydose.shared.Unit;
 import com.heavydose.shared.enemies.Enemy;
 import com.heavydose.util.Tools;
 

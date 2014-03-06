@@ -1,7 +1,7 @@
 package com.heavydose.shared.items.weapons;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.Bullet;
 import com.heavydose.shared.bullets.GenericBullet;
@@ -12,12 +12,12 @@ public class Shotgun extends Weapon {
 	private int bulletShots = 12;
 
 	public Shotgun(Entity owner) {
-		super(owner, "Std Shotgun", 3, 4, 650, 0.95f, 800, 8, 200);
+		super(owner, "Std Shotgun", 3, 4, 650, 0.95f, 800, 8, 100);
 		canInteruptReload = true;
 		soundShoot = Cache.sounds.get("shotgun");
 		soundReload = Cache.sounds.get("reload_shotgun");
 		dropItemImage = Cache.images.get("item_s");
-		setBullet(new GenericBullet(this, 0, 0f, 0f, com.heavydose.client.Cache.images.get("b_pistol")));
+		setBullet(new GenericBullet(this, 0, 0f, 0f, Cache.images.get("b_pistol")));
 		
 	}
 	
@@ -64,5 +64,7 @@ public class Shotgun extends Weapon {
 		
 		return null;
 	}
+
+
 
 }

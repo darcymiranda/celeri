@@ -2,7 +2,7 @@ package com.heavydose.shared.items.powerups;
 
 import org.newdawn.slick.particles.ConfigurableEmitter;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.Unit;
 

@@ -5,9 +5,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.util.FastTrig;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
-import com.heavydose.shared.DetermineSide;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.items.weapons.Weapon;
 

@@ -7,8 +7,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.Unit;
 import com.heavydose.shared.bullets.BEnemy;
@@ -28,6 +28,9 @@ public class Strangler extends Enemy {
 
 	public Strangler(float x, float y, int level) {
 		super(x, y, 32, 32, level);
+
+        score = 82;
+
 		speed = 150;
 		sight = 250000;
 		setHealth(45);

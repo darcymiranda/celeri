@@ -2,12 +2,11 @@ package com.heavydose.shared.items.powerups;
 
 import org.newdawn.slick.particles.ConfigurableEmitter;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.Hero;
 import com.heavydose.shared.Unit;
-import com.heavydose.shared.items.Item;
 import com.heavydose.shared.items.weapons.Weapon;
 
 public class FireRateBonus extends Powerup{

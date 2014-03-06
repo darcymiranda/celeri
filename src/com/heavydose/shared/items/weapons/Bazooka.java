@@ -1,6 +1,6 @@
 package com.heavydose.shared.items.weapons;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.BBazooka;
 
@@ -12,7 +12,7 @@ public class Bazooka extends Weapon{
 		soundReload = Cache.sounds.get("reload");
 		dropItemImage = Cache.images.get("item_m");
 		
-		setBullet(new BBazooka(this, 0, 0f, 0f, com.heavydose.client.Cache.images.get("b_pistol")));
+		setBullet(new BBazooka(this, 0, 0f, 0f, Cache.images.get("b_pistol")));
 		
 	}
 	

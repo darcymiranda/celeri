@@ -9,11 +9,10 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.util.FastTrig;
 
-import com.esotericsoftware.minlog.Log;
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
-import com.heavydose.client.game.Effect;
-import com.heavydose.client.game.gui.DurationBarManager;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
+import com.heavydose.game.Effect;
+import com.heavydose.game.gui.DurationBarManager;
 import com.heavydose.shared.bullets.Bullet;
 import com.heavydose.shared.enemies.WormBoss;
 import com.heavydose.shared.items.powerups.Powerup;
@@ -127,7 +126,7 @@ public abstract class Unit extends NetEntity {
 		this.maxHealth = maxHealth;
 		if(health > maxHealth){
 			this.health = maxHealth;
-			Log.warn(this + " set health " + health+ " to higher than max health " + maxHealth);
+            System.out.println(this + " set health " + health + " to higher than max health " + maxHealth);
 		}
 	}
 	

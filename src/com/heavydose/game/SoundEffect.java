@@ -1,4 +1,4 @@
-package com.heavydose.client.game;
+package com.heavydose.game;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,11 +1,11 @@
-package com.heavydose.client.game.gui;
+package com.heavydose.game.gui;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.game.Celeri;
+import com.heavydose.game.Celeri;
 
 
 public class Component {

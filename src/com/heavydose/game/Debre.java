@@ -1,11 +1,11 @@
-package com.heavydose.client.game;
+package com.heavydose.game;
 
 import java.util.Random;
 
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.util.FastTrig;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 
 public class Debre extends Effect{
 	

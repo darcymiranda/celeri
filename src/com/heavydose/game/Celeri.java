@@ -1,4 +1,4 @@
-package com.heavydose.client.game;
+package com.heavydose.game;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,27 +16,19 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.particles.ParticleSystem;
 
 
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Listener.ThreadedListener;
-import com.esotericsoftware.minlog.Log;
-import com.heavydose.client.Cache;
-import com.heavydose.client.ClientIncoming;
-import com.heavydose.client.game.gui.Component;
-import com.heavydose.client.game.gui.HealthBar;
-import com.heavydose.client.game.gui.Hud;
-import com.heavydose.client.game.gui.ItemMenu;
-import com.heavydose.client.game.gui.Overlay;
-import com.heavydose.client.game.gui.TextField;
-import com.heavydose.network.Network;
-import com.heavydose.network.Player;
+import com.heavydose.Cache;
+import com.heavydose.game.gui.Component;
+import com.heavydose.game.gui.HealthBar;
+import com.heavydose.game.gui.Hud;
+import com.heavydose.game.gui.ItemMenu;
+import com.heavydose.game.gui.Overlay;
+import com.heavydose.game.gui.TextField;
 import com.heavydose.shared.DetermineSide;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.EntityManager;
 import com.heavydose.shared.Hero;
 import com.heavydose.shared.enemies.Creeper;
 import com.heavydose.shared.enemies.Spitter;
-import com.heavydose.shared.enemies.Strangler;
-import com.heavydose.shared.enemies.WormBoss;
 import com.heavydose.shared.items.Item;
 import com.heavydose.shared.items.weapons.Weapon;
 import com.heavydose.shared.items.weapons.WeaponFactory;
@@ -61,8 +53,7 @@ public class Celeri extends BasicGame {
 	public static Hud hud;
 	
 	public static Level currentLevel;
-	
-	private Client client;
+
 	public static Camera cam;
 	
 	public Hero localHero;
@@ -89,50 +80,12 @@ public class Celeri extends BasicGame {
 		//gc.setSmoothDeltas(true);
 		
 		gc.setSoundVolume(0.15f);
+        gc.setShowFPS(false);
 		
 		Celeri.gc = gc;
 		DetermineSide.isClient = true;
 		
 		hud = new Hud(gc);
-		
-		client = new Client(16384, 16*1024);
-		client.start();
-		Network.register(client);
-		client.addListener(new ThreadedListener(new ClientIncoming(this)));
-		
-		/*
-		// Read configuration file
-		String host = "127.0.0.1";
-		int port = Network.PORT;
-		String username = "unknown";
-		File conf = new File("unknown.conf");
-		
-		try{
-			BufferedReader br = new BufferedReader(new FileReader(conf));
-			host = br.readLine();
-			port = Integer.parseInt(br.readLine());
-			username = br.readLine();
-			br.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		*/
-		// Connect to server
-		/* IGNORE NETWORK
-		try {
-			client.connect(15000, host, port);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
-		
-		/* IGNORE NETWORK
-		Network.Connect connect = new Network.Connect();
-		connect.username = username;
-		client.sendTCP(connect);
-		*/
-		
-		
 	}
 	
 	@Override
@@ -142,10 +95,6 @@ public class Celeri extends BasicGame {
 		
 		switch(currentState){
 			case LOAD_GAME:
-				/* IGNORE NETWORK
-				if(client.isConnected() && map.isLoaded())
-				*/
-				
 				// LOAD CACHE
 				Cache.load();
 				Emitters.init();
@@ -163,13 +112,16 @@ public class Celeri extends BasicGame {
 				particleSystem.setRemoveCompletedEmitters(true);
 				
 				hud.clearHud();
-				
+
+                /*
 				TextField debug = new TextField(Cache.fonts.get("default"),
 						"debug",
 						gc.getWidth() - 300, 50,
 						50, 50);
 				debug.setText("Press F1 to reset");
+
 				hud.addComponent(debug);
+				*/
 				hud.addComponent(new Overlay("0overlay", new Vector2f(0,0)));
 				hud.addComponent(new HealthBar("1mainHealth", new Vector2f(60, 9)));
 				hud.addComponent(new Component("2wires", new Vector2f(327,13), Cache.images.get("ui_wires")));
@@ -183,8 +135,8 @@ public class Celeri extends BasicGame {
 						50, 50));
 				hud.addComponent(new TextField(Cache.fonts.get("counter"),
 						"enemyCount",
-						gc.getWidth() - 250, gc.getHeight() - 100,
-						50, 50));
+                        gc.getWidth() - 300, 50,
+                        50, 50));
 				hud.addComponent(new TextField(Cache.fonts.get("counter"),
 						"levelDisplay",
 						gc.getWidth() / 2 - 50, 50,
@@ -208,7 +160,8 @@ public class Celeri extends BasicGame {
 				focusCamera(localHero);
 				
 				currentState = STATES.PLAY_GAME;
-				Cache.music.get("rock_loop").loop(1, 0.05f);
+                Cache.music.get("rock_loop").loop(1, 0);
+                Cache.music.get("rock_loop").fade(1000, 0.05f, false);
 				break;
 				
 			case PLAY_GAME:
@@ -246,12 +199,12 @@ public class Celeri extends BasicGame {
 				// DEBUG
 				//((TextField)hud.components.get("enemyCount")).setText("(" + Celeri.entityManager.getEnemyCount() + ")  " +
 				//		currentLevel.getRemainingEnemies());
-				((TextField)hud.components.get("enemyCount")).setText("Kills: " + localHero.getKillCount() );
+				((TextField)hud.components.get("enemyCount")).setText("Score: " + localPlayer.getScore() );
 				
-				((TextField)hud.components.get("levelDisplay")).setText("Level: " + currentLevel.getLevelCount());
+				//((TextField)hud.components.get("levelDisplay")).setText("Stage: " + currentLevel.getLevelCount());
 				
 				// Shift to next level
-				System.out.println(currentLevel.getRemainingEnemies() + " " + currentLevel.getLevelCount());
+				//System.out.println(currentLevel.getRemainingEnemies() + " " + currentLevel.getLevelCount());
 				if(currentLevel.getRemainingEnemies() < 10 * (1 + (currentLevel.getLevelCount() / 2))){
 					currentLevel.nextLevel();
 				}
@@ -280,14 +233,8 @@ public class Celeri extends BasicGame {
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		switch(currentState){
 			case LOAD_GAME:
-				String msg = "loading just chill...";
-				
-				/* IGNORE NETWORK
-				if(!client.isConnected())
-					msg = "Connecting to host...";
-				else if(!map.isLoaded())
-					msg = "Downloading map...";
-				*/
+				String msg = "loading...";
+
 				
 				g.drawString(msg, gc.getWidth()/2-(gc.getDefaultFont().getWidth(msg)/2),
 								  gc.getHeight()/2-gc.getDefaultFont().getHeight(msg));
@@ -385,13 +332,6 @@ public class Celeri extends BasicGame {
 			if(localHero.isAlive()){
 			
 				localHero.setShooting(true);
-				
-				/* IGNORE NETWORK
-				Network.Shoot shoot = new Network.Shoot();
-				shoot.shooting = localHero.isShooting();
-				shoot.owner = localHero.id;
-				client.sendTCP(shoot);
-				*/
 			
 			}
 			
@@ -473,8 +413,13 @@ public class Celeri extends BasicGame {
 		
 		if(key == Input.KEY_V){
 			if(currentState == STATES.PLAY_GAME){
+                Cache.music.get("rock_loop").fade(500, 0.0095f, false);
+                Cache.music.get("boss_loop").fade(500, 0.0095f, false);
 				this.showItemMenu();
 			}else if(currentState == STATES.ITEM_MENU){
+
+                Cache.music.get("rock_loop").fade(500, 0.05f, false);
+                Cache.music.get("boss_loop").fade(500, 0.05f, false);
 				this.hideItemMenu();
 			}
 		}
@@ -486,6 +431,8 @@ public class Celeri extends BasicGame {
 			SHOW_GENERIC_RAYS = !SHOW_GENERIC_RAYS;
 			SHOW_HITBOXES = !SHOW_HITBOXES;
 			SHOW_ENEMY_ATTACKS = !SHOW_ENEMY_ATTACKS;
+
+            gc.setShowFPS(true);
 		}
 		
 		// Gernade throw
@@ -496,7 +443,7 @@ public class Celeri extends BasicGame {
 			
 			Vector2f target = new Vector2f(mousex, mousey);
 			
-			localHero.throwGernade(target);
+			//localHero.throwGernade(target);
 		}
 		
 		if(key == Input.KEY_R){
@@ -710,7 +657,6 @@ public class Celeri extends BasicGame {
 		}catch(SlickException e){
 			e.printStackTrace();
 		}
-		Log.set(Log.LEVEL_DEBUG);
 	}
 
 }

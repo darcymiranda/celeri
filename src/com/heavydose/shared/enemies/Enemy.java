@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.util.FastTrig;
 
-import com.heavydose.client.game.Celeri;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.MoveNode;
 import com.heavydose.shared.Unit;
@@ -17,6 +17,8 @@ import com.heavydose.shared.items.ItemDropper;
 import com.heavydose.util.Tools;
 
 public class Enemy extends Unit {
+
+    public int score = 0;
 	
 	private final int DEFAULT_LOCK_TIME = 10000;
 	private final int DEFAULT_SIGHT_RANGE = 150000;
@@ -295,6 +297,8 @@ public class Enemy extends Unit {
 		
 		if(killer == null)
 			return;
+
+        killer.getOwnerPlayer().addScore(score);
 			
 		// Items
 		if(rand.nextDouble() > 0.80){

@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.shared.DetermineSide;
 import com.heavydose.shared.Entity;
 import com.heavydose.util.Point;

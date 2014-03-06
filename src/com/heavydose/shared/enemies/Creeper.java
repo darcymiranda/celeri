@@ -4,10 +4,9 @@ import java.util.Random;
 
 import org.newdawn.slick.Sound;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
-import com.heavydose.client.game.Debre;
-import com.heavydose.client.game.Effect;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
+import com.heavydose.game.Debre;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.bullets.BEnemy;
 import com.heavydose.shared.bullets.Bullet;
@@ -18,6 +17,8 @@ public class Creeper extends Enemy {
 
 	public Creeper(float x, float y, int level) {
 		super(x, y, 32, 32, level);
+
+        score = 15;
 		
 		speed = 110;
 		sight = 250000;

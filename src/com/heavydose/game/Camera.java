@@ -1,5 +1,5 @@
 
-package com.heavydose.client.game;
+package com.heavydose.game;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Shape;
@@ -95,8 +95,6 @@ public class Camera {
    int step = 0;
    
    public void update(int delta){
-
-	   
 	   if(shake){
 		   
 		   if(shakeDecay < 0){
@@ -104,16 +102,16 @@ public class Camera {
 			   if(repeat > 0){
 			   
 				   if(step == 0){
-					   
+
 					   shakeDecay = 50 * intensity;
 					   shakeX = cameraX - 50 * intensity;
-	
+
 				   }
 				   else if(step == 1){
-					   
+
 					   shakeDecay = 50 * intensity;
 					   shakeX = cameraX + 50 * intensity;
-					   
+
 				   }else{
 					   centerOn(focus);
 					   step = -1;
@@ -143,10 +141,10 @@ public class Camera {
 	  
    }
    
-   public void shake(){
+   public void shake(float intensity, int repeat){
 	   shake = true;
-	   intensity = 3;
-	   repeat = 6;
+	   this.intensity = intensity;
+	   this.repeat = repeat;
 	   step = 0;
    }
    

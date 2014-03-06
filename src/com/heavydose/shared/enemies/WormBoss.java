@@ -1,14 +1,15 @@
 package com.heavydose.shared.enemies;
 
+import com.heavydose.shared.items.DropItem;
+import com.heavydose.shared.items.ItemDropper;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.util.FastTrig;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
-import com.heavydose.client.game.gui.HealthBar;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
+import com.heavydose.game.gui.HealthBar;
 import com.heavydose.shared.Entity;
 import com.heavydose.shared.Hero;
 import com.heavydose.shared.bullets.Bullet;
@@ -27,14 +28,16 @@ public class WormBoss extends Enemy {
 	private final int EAT_SPEED = 250;
 	private final int HERO_SPEED = 150;
 	
-	private int retreatCount = 15;
-	private int retreatTime = 10000;	
+	private int retreatCount = 3;
+	private int retreatTime = 7000;
 	private int retreatInterval;
 	
 	private Entity oldTarget;
 
 	public WormBoss(float x, float y, int level) {
 		super(x, y, 32, 32, level);
+
+        score = 8325;
 		
 		//turnSpeed = TURN_SPEED;
 		speed = EAT_SPEED;
@@ -42,8 +45,8 @@ public class WormBoss extends Enemy {
 		enablePathfinding = true;
 		knockbackResistance = 0;
 		sight = 2500000;
-		setHealth(500);
-		attackRange = 2500;
+		setHealth(100);
+		attackRange = 2200;
 		chase = true;
 		type = Entity.BOSS;
 		setImage(Cache.images.get("worm_head"), false);
@@ -82,7 +85,7 @@ public class WormBoss extends Enemy {
 		//ceDebre.setEnabled(Celeri.currentLevel.getMap().isPositionBlocked(position));
 		//ceDebre.setPosition(getCenterX(), getCenterY(), false);
 		
-		((HealthBar)Celeri.hud.components.get("WormBossHealth")).setAmount(health, maxHealth);
+//		((HealthBar)Celeri.hud.components.get("WormBossHealth")).setAmount(health, maxHealth);
 		
 		if(child != null){
 		
@@ -167,8 +170,8 @@ public class WormBoss extends Enemy {
 		
 		Celeri.hud.components.remove("WormBossHealth");
 		
-		Cache.music.get("boss_loop").fade(6000, 0, true);
-		Cache.music.get("rock_loop").setVolume(1);
+		Cache.music.get("boss_loop").fade(6000, 0, false);
+		Cache.music.get("rock_loop").fade(3000, 0.05f, false);
 		Cache.music.get("rock_loop").loop(1, 0.05f);
 		
 	}
@@ -183,7 +186,7 @@ public class WormBoss extends Enemy {
 			entity.kill(this);
 			
 			addChild();
-			this.addHealth(15);
+            if(getHealth() < getMaxHealth()) addHealth(10);
 			
 			// find new target
 			targetInc = 0;
@@ -214,7 +217,7 @@ public class WormBoss extends Enemy {
 		else if(entity instanceof Hero){
 			
 			((Hero) entity).takeDamage(this, 10);
-			((Hero) entity).knockback(rotation - 180, 50);
+			((Hero) entity).knockback(rotation - 180, 70);
 			entity.hit(this);
 			
 		}
@@ -276,6 +279,17 @@ public class WormBoss extends Enemy {
 			
 			this.setHitBox();
 		}
+
+        @Override
+        protected void onDeath(Entity killer){
+            super.onDeath(killer);
+
+            DropItem item = ItemDropper.getInstance().dropHealth(position.x, position.y);
+            item.setHitBox();
+            item.directionFling(this.getRotation() - 180f, rand.nextInt(75) + 75);
+            Celeri.entityManager.addItem(item);
+
+        }
 		
 		@Override
 		protected void onHit(Entity entity){

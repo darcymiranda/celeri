@@ -1,4 +1,4 @@
-package com.heavydose.client.game.gui;
+package com.heavydose.game.gui;
 
 import java.util.ArrayList;
 
@@ -7,8 +7,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
-import com.heavydose.client.game.Celeri;
+import com.heavydose.Cache;
+import com.heavydose.game.Celeri;
 import com.heavydose.shared.items.Item;
 import com.heavydose.shared.items.weapons.Weapon;
 
@@ -121,7 +121,10 @@ public class ItemMenu extends Component {
 		@Override
 		public void mouseClicked(int button, int x, int y){
 			if(hitBox.intersects(new Rectangle(x,y,0,0))){
-				
+
+                Cache.music.get("rock_loop").fade(500, 0.05f, false);
+                Cache.music.get("boss_loop").fade(500, 0.05f, false);
+
 				game.localHero.equipWeapon((Weapon) item);
 				game.hideItemMenu();
 				

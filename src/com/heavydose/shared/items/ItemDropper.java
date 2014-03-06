@@ -36,6 +36,10 @@ public class ItemDropper {
 		return new DropItem(x, y, powFact.getPowerupSkeleton(type));
 		
 	}
+
+    public DropItem dropHealth(float x, float y){
+        return new DropItem(x, y, PowerupFactory.getInstance().getPowerupSkeleton(1));
+    }
 	
 	private ItemDropper(){}
 	

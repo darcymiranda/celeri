@@ -1,10 +1,11 @@
-package com.heavydose.client.game.gui;
+package com.heavydose.game.gui;
 
+import com.heavydose.shared.Unit;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-import com.heavydose.client.Cache;
+import com.heavydose.Cache;
 import com.heavydose.util.Tools;
 
 
@@ -17,6 +18,8 @@ public class HealthBar extends Component {
 	
 	private HealthUnit[] healthUnits;
 	private int renderHealthUnits = UNITS;
+
+    private Unit unit;
 	
 	public HealthBar(String name, Vector2f position) {
 		super(name, position, 0, 0);
@@ -31,7 +34,11 @@ public class HealthBar extends Component {
 	@Override
 	public void render(Graphics g){
 		super.render(g);
-		
+
+        if(unit != null){
+            setAmount(unit.getHealth(), unit.getMaxHealth());
+        }
+
 		float x = position.x + XOFFSET;
 		float y = position.y + YOFFSET; 
 		
@@ -42,8 +49,13 @@ public class HealthBar extends Component {
 			x += hu.width - 1;
 			
 		}
+
 		
 	}
+
+    public void setUnit(Unit unit){
+        this.unit = unit;
+    }
 	
 	public void setAmount(float amount, float totalAmount){
 		renderHealthUnits = Tools.clamp(Math.round(UNITS * (amount / totalAmount)), 0, UNITS);
@@ -66,5 +78,7 @@ public class HealthBar extends Component {
 		}
 		
 	}
+
+    public int getWidth(){ return width; }
 
 }
